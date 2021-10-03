@@ -1,6 +1,4 @@
 const { Cube } = require('@toio/cube')
-
-
 const noble = require('@abandonware/noble');
 
 
