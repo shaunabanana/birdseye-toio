@@ -119,7 +119,7 @@ class CubeManager {
                 } else if (this.cubes[event.cube].orientation === 2 && this.cubes[cube.name].orientation === 1) {
                     console.log('Emptying', event.cube, 'on', cube.name);
                     this.broadcast({
-                        'event': 'toio:empty',
+                        'event': 'toio:dump',
                         'from': event.cube,
                         'to': cube.name,
                     })
