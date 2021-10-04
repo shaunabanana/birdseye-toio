@@ -30,15 +30,17 @@ class CubeManager {
 
         this.server = new WebSocketServer({ port: 8175 });
 
-        if (bypassWebSocket) {
-            this.connect();
-        } else {
-            console.log('Waiting for the frontend to connect...');
-            this.server.on('connection', () => {
-                console.log('WebSocket connected.');
-                this.connect();
-            });
-        }
+        this.connect();
+
+        this.server.on('connection', () => {
+            console.log('A WebSocket client connected.');
+            for (let cube of Object.keys(this.cubes)) {
+                this.broadcast({
+                    'event': 'toio:connect',
+                    'name': cube
+                })
+            }
+        });
         
     }
 
