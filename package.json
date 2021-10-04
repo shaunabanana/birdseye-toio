@@ -10,6 +10,8 @@
   "author": "Shauna Zhang",
   "license": "MIT",
   "dependencies": {
-    "@abandonware/noble": "^1.9.2-14"
+    "@abandonware/noble": "^1.9.2-14",
+    "kalmanjs": "^1.1.0",
+    "ws": "^8.2.3"
   }
 }
