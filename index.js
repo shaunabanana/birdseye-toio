@@ -155,9 +155,13 @@ class CubeManager {
     }
 
     onMove(cube, data) {
-        cube.x = this.xFilter.filter(data.x);
-        cube.y = this.yFilter.filter(data.y);
-        cube.angle = this.angleFilter.filter(data.angle);
+        // cube.x = this.xFilter.filter(data.x);
+        // cube.y = this.yFilter.filter(data.y);
+        // cube.angle = this.angleFilter.filter(data.angle);
+
+        cube.x = data.x;
+        cube.y = data.y;
+        cube.angle = data.angle;
 
         this.broadcast({
             'event': 'toio:move',
