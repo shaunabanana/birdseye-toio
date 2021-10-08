@@ -12,6 +12,7 @@
   "dependencies": {
     "@abandonware/noble": "^1.9.2-14",
     "kalmanjs": "^1.1.0",
+    "node-pid-controller": "^1.0.1",
     "ws": "^8.2.3"
   }
 }
