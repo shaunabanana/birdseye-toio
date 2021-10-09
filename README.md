@@ -1,3 +1,5 @@
+![BirdsEye by Shengchen Zhang and Zixuan Wang](./assets/cover.png)
+
 <h1 align="center">BirdsEye-Toio</h1>
 <p align="center">Manage toio robots used in the BirdsEye project</p>
 <p align="center">
