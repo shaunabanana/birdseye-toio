@@ -98,6 +98,7 @@ class CubeManager {
             this.onMove(cube, data);
         });
         cube.control.on('sensor:orientation', data => {
+            console.log(data.orientation)
             cube.orientation = data.orientation
         });
         cube.control.on('sensor:double-tap', this.onDoubleTap.bind(this, cube));
@@ -124,7 +125,7 @@ class CubeManager {
         for (let event of this.events) {
             if (event.cube !== cube.name
                 && event.type === 'sensor:double-tap'
-                && Math.abs(event.time - eventTime) < 100) {
+                && Math.abs(event.time - eventTime) < 300) {
 
                 if (this.cubes[event.cube].orientation === 1 && this.cubes[cube.name].orientation === 1) {
                     console.log('Linking', event.cube, 'and', cube.name);
@@ -157,6 +158,15 @@ class CubeManager {
                         'cube': cube.name
                     });
                     cube.active = false;
+                } else if (this.cubes[event.cube].orientation === 3 && this.cubes[cube.name].orientation === 3) {
+                    console.log('Deactivating all cubes');
+                    for (let cubeName of Object.keys(this.cubes)) {
+                        this.cubes[cubeName].active = false;
+                        this.cubes[cubeName].control.playPresetSound(0);
+                    }
+                    this.broadcast({
+                        'event': 'toio:reset'
+                    });
                 }
                 this.events = [];
                 return;
@@ -168,7 +178,7 @@ class CubeManager {
             for (let event of this.events) {
                 if (event.cube !== cube.name
                     && event.type === 'sensor:double-tap'
-                    && Math.abs(event.time - eventTime) < 100) {
+                    && Math.abs(event.time - eventTime) < 300) {
                     this.events = [];
                     return;
                 }
@@ -179,18 +189,9 @@ class CubeManager {
                     'event': 'toio:expand',
                     'cube': cube.name
                 })
-            } else if (cube.orientation === 2) {
-                console.log('Deactivating all cubes');
-                for (let cubeName of Object.keys(this.cubes)) {
-                    this.cubes[cubeName].active = false;
-                    this.cubes[cubeName].control.playPresetSound(0);
-                }
-                this.broadcast({
-                    'event': 'toio:reset'
-                });
             }
             
-        }, 100);
+        }, 300);
     }
 
     onMove(cube, data) {
